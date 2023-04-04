@@ -1,0 +1,39 @@
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+sudo apt install git -y
+# install VBox
+sudo apt install virtualbox -y
+sudo apt update -y
+# install and setup docker
+sudo apt install docker.io -y
+sudo apt install apt-transport-https curl -y
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update
+sudo apt install kubeadm kubelet kubectl kubernetes-cni
+udo swapoff -a
+echo 'comment out the /swapfile line'
+
+sudo nano /etc/fstab
+# install minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+# start it
+minikube start
+minikube addons enable dashboard
+minikube addons enable metrics-server
+kubectl get pods
+
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+
+
+
+pip install opentelemetry-distro[otlp] flask requests opentelemetry-api opentelemetry-sdk opentelemetry-instrumentation faker  
+pip install opentelemetry-api==1.10.0 opentelemetry-sdk==1.10.0 opentelemetry-propagator-b3==1.10.0
+pip install flask opentelemetry-distro opentelemetry-exporter-otlp opentelemetry-exporter-otlp-proto-grpc opentelemetry-api 
